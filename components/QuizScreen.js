@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import {styles} from './../styles/Styles';
 import {ScrollView, Text, TouchableOpacity} from 'react-native';
-import {countriesByCapital} from '../assets/countries-by-capital';
-import {countriesByContinent} from '../assets/countries-by-continent';
+import {countries} from '../assets/countries';
 
 export default class QuizScreen extends Component {
   constructor() {
@@ -17,16 +16,9 @@ export default class QuizScreen extends Component {
   }
 
   componentDidMount() {
-    console.log(JSON.stringify(this.props, null, 2));
-    let res = countriesByCapital
-      .map(x =>
-        Object.assign(x, {
-          continent: countriesByContinent.find(y => y.country === x.country)
-            ? countriesByContinent.find(y => y.country === x.country).continent
-            : undefined,
-        }),
-      )
-      .filter(x => x.continent === this.props.route.params.continent);
+    let res = countries.filter(
+      x => x.continent === this.props.route.params.continent,
+    );
 
     this.setState(
       {
@@ -39,7 +31,6 @@ export default class QuizScreen extends Component {
   }
 
   getAlternatives = () => {
-    console.log(this.state.currentQuestion);
     let alternatives = [];
     while (alternatives.length < 3) {
       let randomItem = Math.floor(Math.random() * this.state.numberOfQuestions);
