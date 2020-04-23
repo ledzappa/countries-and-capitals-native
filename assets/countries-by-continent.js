@@ -456,7 +456,7 @@ export const countriesByContinent = [
     continent: "Africa"
   },
   {
-    country: "Libyan Arab Jamahiriya",
+    country: "Libya",
     continent: "Africa"
   },
   {
