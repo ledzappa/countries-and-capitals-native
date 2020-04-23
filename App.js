@@ -57,7 +57,7 @@ const continentSelectScreen = ({navigation}) => {
       {continents.map(continent => (
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate('QuizScreen')}>
+          onPress={() => navigation.navigate('QuizScreen', { continent })}>
           <Text style={styles.buttonText}>{continent}</Text>
         </TouchableOpacity>
       ))}
