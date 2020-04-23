@@ -33,13 +33,14 @@ export default class QuizScreen extends Component {
   getAlternatives = () => {
     let alternatives = [];
     while (alternatives.length < 3) {
-      let randomItem = Math.floor(Math.random() * this.state.numberOfQuestions);
+      let randNum = Math.floor(Math.random() * this.state.numberOfQuestions);
+      const alternative = this.state.questions[randNum].city;
 
       if (
-        alternatives.indexOf(this.state.questions[randomItem].city) === -1 &&
-        randomItem !== this.state.currentQuestion
+        alternatives.indexOf(alternative) === -1 &&
+        randNum !== this.state.currentQuestion
       ) {
-        alternatives.push(this.state.questions[randomItem].city);
+        alternatives = [...alternatives, alternative];
       }
     }
 
