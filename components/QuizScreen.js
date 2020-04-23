@@ -56,9 +56,7 @@ export default class QuizScreen extends Component {
     alternatives.splice(
       Math.floor(Math.random() * (alternatives.length + 1)),
       0,
-      this.state.questions[this.state.currentQuestion]
-        ? this.state.questions[this.state.currentQuestion].city
-        : 'asdf',
+      this.state.questions[this.state.currentQuestion]?.city,
     );
 
     this.setState({alternatives: alternatives});
@@ -72,9 +70,12 @@ export default class QuizScreen extends Component {
   };
 
   showAnswer = () => {
-    this.setState({
-      correctAnswers: this.state.correctAnswers + 1,
-    }, this.nextQuestion);
+    this.setState(
+      {
+        correctAnswers: this.state.correctAnswers + 1,
+      },
+      this.nextQuestion,
+    );
   };
 
   render() {
@@ -87,9 +88,7 @@ export default class QuizScreen extends Component {
           {this.state.numberOfQuestions + 1}
         </Text>
         <Text style={styles.header}>
-          {this.state.questions[this.state.currentQuestion]
-            ? this.state.questions[this.state.currentQuestion].country
-            : ''}
+          {this.state.questions[this.state.currentQuestion]?.country}
         </Text>
         {this.state.alternatives.map(alternative => (
           <TouchableOpacity
