@@ -19,6 +19,13 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     padding: 10,
   },
+  buttonAnswer: {
+    borderRadius: 10,
+    backgroundColor: '#38ad38',
+    marginBottom: 10,
+    textAlign: 'center',
+    padding: 10,
+  },
   buttonText: {
     fontWeight: 'bold',
     fontSize: 20,
