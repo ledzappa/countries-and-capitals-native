@@ -22,7 +22,7 @@ export const styles = StyleSheet.create({
   },
   button: {
     borderRadius: 10,
-    backgroundColor: '#666',
+    backgroundColor: '#474794',
     marginBottom: 10,
     textAlign: 'center',
     padding: 10,
@@ -38,9 +38,6 @@ export const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 20,
     color: '#fff',
-    textShadowColor: 'rgba(0, 0, 0, 0.75)',
-    textShadowOffset: {width: -1, height: 1},
-    textShadowRadius: 10,
     textAlign: 'center',
   },
 });

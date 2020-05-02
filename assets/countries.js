@@ -18,12 +18,6 @@ export const countries = [
     continent: 'Africa',
   },
   {
-    country: 'American Samoa',
-    flag: require('../assets/flags/png/american_samoa.png'),
-    city: 'Fagatogo',
-    continent: 'Oceania',
-  },
-  {
     country: 'Andorra',
     flag: require('../assets/flags/png/andorra.png'),
     city: 'Andorra la Vella',
@@ -34,12 +28,6 @@ export const countries = [
     flag: require('../assets/flags/png/angola.png'),
     city: 'Luanda',
     continent: 'Africa',
-  },
-  {
-    country: 'Anguilla',
-    flag: require('../assets/flags/png/anguilla.png'),
-    city: 'The Valley',
-    continent: 'North America',
   },
   {
     country: 'Antigua and Barbuda',
@@ -58,12 +46,6 @@ export const countries = [
     flag: require('../assets/flags/png/armenia.png'),
     city: 'Yerevan',
     continent: 'Asia',
-  },
-  {
-    country: 'Aruba',
-    flag: require('../assets/flags/png/aruba.png'),
-    city: 'Oranjestad',
-    continent: 'North America',
   },
   {
     country: 'Australia',
@@ -130,12 +112,6 @@ export const countries = [
     flag: require('../assets/flags/png/benin.png'),
     city: 'Porto-Novo',
     continent: 'Africa',
-  },
-  {
-    country: 'Bermuda',
-    flag: require('../assets/flags/png/aruba.png'),
-    city: 'Hamilton',
-    continent: 'North America',
   },
   {
     country: 'Bhutan',
@@ -216,12 +192,6 @@ export const countries = [
     continent: 'Africa',
   },
   {
-    country: 'Cayman Islands',
-    flag: require('../assets/flags/png/aruba.png'),
-    city: 'George Town',
-    continent: 'North America',
-  },
-  {
     country: 'Central African Republic',
     flag: require('../assets/flags/png/aruba.png'),
     city: 'Bangui',
@@ -246,18 +216,6 @@ export const countries = [
     continent: 'Asia',
   },
   {
-    country: 'Christmas Island',
-    flag: require('../assets/flags/png/aruba.png'),
-    city: 'Flying Fish Cove',
-    continent: 'Oceania',
-  },
-  {
-    country: 'Cocos (Keeling) Islands',
-    flag: require('../assets/flags/png/aruba.png'),
-    city: 'West Island',
-    continent: 'Oceania',
-  },
-  {
     country: 'Colombia',
     flag: require('../assets/flags/png/colombia.png'),
     city: 'Santaf',
@@ -274,12 +232,6 @@ export const countries = [
     flag: require('../assets/flags/png/congo.png'),
     city: 'Brazzaville',
     continent: 'Africa',
-  },
-  {
-    country: 'Cook Islands',
-    flag: require('../assets/flags/png/aruba.png'),
-    city: 'Avarua',
-    continent: 'Oceania',
   },
   {
     country: 'Costa Rica',
@@ -360,12 +312,6 @@ export const countries = [
     continent: 'North America',
   },
   {
-    country: 'England',
-    flag: require('../assets/flags/png/england.png'),
-    city: 'London',
-    continent: 'Europe',
-  },
-  {
     country: 'Equatorial Guinea',
     flag: require('../assets/flags/png/equatorial_guinea.png'),
     city: 'Malabo',
@@ -390,19 +336,7 @@ export const countries = [
     continent: 'Africa',
   },
   {
-    country: 'Falkland Islands',
-    flag: require('../assets/flags/png/falkland_islands.png'),
-    city: 'Stanley',
-    continent: 'South America',
-  },
-  {
-    country: 'Faroe Islands',
-    flag: require('../assets/flags/png/faroe_islands.png'),
-    city: 'Tórshavn',
-    continent: 'Europe',
-  },
-  {
-    country: 'Fiji Islands',
+    country: 'Fiji',
     flag: require('../assets/flags/png/fiji.png'),
     city: 'Suva',
     continent: 'Oceania',
@@ -418,18 +352,6 @@ export const countries = [
     flag: require('../assets/flags/png/france.png'),
     city: 'Paris',
     continent: 'Europe',
-  },
-  {
-    country: 'French Guiana',
-    flag: require('../assets/flags/png/french_guiana.png'),
-    city: 'Cayenne',
-    continent: 'South America',
-  },
-  {
-    country: 'French Polynesia',
-    flag: require('../assets/flags/png/french_polynesia.png'),
-    city: 'Papeete',
-    continent: 'Oceania',
   },
   {
     country: 'Gabon',
@@ -462,40 +384,16 @@ export const countries = [
     continent: 'Africa',
   },
   {
-    country: 'Gibraltar',
-    flag: require('../assets/flags/png/gibraltar.png'),
-    city: 'Gibraltar',
-    continent: 'Europe',
-  },
-  {
     country: 'Greece',
     flag: require('../assets/flags/png/greece.png'),
     city: 'Athenai',
     continent: 'Europe',
   },
   {
-    country: 'Greenland',
-    flag: require('../assets/flags/png/greenland.png'),
-    city: 'Nuuk',
-    continent: 'North America',
-  },
-  {
     country: 'Grenada',
     flag: require('../assets/flags/png/grenada.png'),
     city: "Saint George's",
     continent: 'North America',
-  },
-  {
-    country: 'Guadeloupe',
-    flag: require('../assets/flags/png/guadeloupe.png'),
-    city: 'Basse-Terre',
-    continent: 'North America',
-  },
-  {
-    country: 'Guam',
-    flag: require('../assets/flags/png/aruba.png'),
-    city: 'Aga',
-    continent: 'Oceania',
   },
   {
     country: 'Guatemala',
@@ -528,7 +426,7 @@ export const countries = [
     continent: 'North America',
   },
   {
-    country: 'Vatican City',
+    country: 'Holy See',
     flag: require('../assets/flags/png/vatican_city.png'),
     city: 'Vatican City',
     continent: 'Europe',
@@ -538,12 +436,6 @@ export const countries = [
     flag: require('../assets/flags/png/honduras.png'),
     city: 'Tegucigalpa',
     continent: 'North America',
-  },
-  {
-    country: 'Hong Kong',
-    flag: require('../assets/flags/png/hong_kong.png'),
-    city: 'Victoria',
-    continent: 'Asia',
   },
   {
     country: 'Hungary',
@@ -708,12 +600,6 @@ export const countries = [
     continent: 'Europe',
   },
   {
-    country: 'Macao',
-    flag: require('../assets/flags/png/macao.png'),
-    city: 'Macao',
-    continent: 'Asia',
-  },
-  {
     country: 'North Macedonia',
     flag: require('../assets/flags/png/north_macedonia.png'),
     city: 'Skopje',
@@ -762,12 +648,6 @@ export const countries = [
     continent: 'Oceania',
   },
   {
-    country: 'Martinique',
-    flag: require('../assets/flags/png/martinique.png'),
-    city: 'Fort-de-France',
-    continent: 'North America',
-  },
-  {
     country: 'Mauritania',
     flag: require('../assets/flags/png/mauritania.png'),
     city: 'Nouakchott',
@@ -786,7 +666,7 @@ export const countries = [
     continent: 'North America',
   },
   {
-    country: 'Micronesia, Federated States of',
+    country: 'Micronesia',
     flag: require('../assets/flags/png/micronesia.png'),
     city: 'Palikir',
     continent: 'Oceania',
@@ -808,12 +688,6 @@ export const countries = [
     flag: require('../assets/flags/png/mongolia.png'),
     city: 'Ulan Bator',
     continent: 'Asia',
-  },
-  {
-    country: 'Montserrat',
-    flag: require('../assets/flags/png/aruba.png'),
-    city: 'Plymouth',
-    continent: 'North America',
   },
   {
     country: 'Morocco',
@@ -858,18 +732,6 @@ export const countries = [
     continent: 'Europe',
   },
   {
-    country: 'Netherlands Antilles',
-    flag: require('../assets/flags/png/aruba.png'),
-    city: 'Willemstad',
-    continent: 'North America',
-  },
-  {
-    country: 'New Caledonia',
-    flag: require('../assets/flags/png/aruba.png'),
-    city: 'Noum',
-    continent: 'Oceania',
-  },
-  {
     country: 'New Zealand',
     flag: require('../assets/flags/png/new_zealand.png'),
     city: 'Wellington',
@@ -894,34 +756,10 @@ export const countries = [
     continent: 'Africa',
   },
   {
-    country: 'Niue',
-    flag: require('../assets/flags/png/aruba.png'),
-    city: 'Alofi',
-    continent: 'Oceania',
-  },
-  {
-    country: 'Norfolk Island',
-    flag: require('../assets/flags/png/aruba.png'),
-    city: 'Kingston',
-    continent: 'Oceania',
-  },
-  {
     country: 'North Korea',
     flag: require('../assets/flags/png/north_korea.png'),
     city: 'Pyongyang',
     continent: 'Asia',
-  },
-  {
-    country: 'Northern Ireland',
-    flag: require('../assets/flags/png/aruba.png'),
-    city: 'Belfast',
-    continent: 'Europe',
-  },
-  {
-    country: 'Northern Mariana Islands',
-    flag: require('../assets/flags/png/aruba.png'),
-    city: 'Garapan',
-    continent: 'Oceania',
   },
   {
     country: 'Norway',
@@ -984,12 +822,6 @@ export const countries = [
     continent: 'Asia',
   },
   {
-    country: 'Pitcairn',
-    flag: require('../assets/flags/png/aruba.png'),
-    city: 'Adamstown',
-    continent: 'Oceania',
-  },
-  {
     country: 'Poland',
     flag: require('../assets/flags/png/poland.png'),
     city: 'Warszawa',
@@ -1002,22 +834,10 @@ export const countries = [
     continent: 'Europe',
   },
   {
-    country: 'Puerto Rico',
-    flag: require('../assets/flags/png/puerto_rico.png'),
-    city: 'San Juan',
-    continent: 'North America',
-  },
-  {
     country: 'Qatar',
     flag: require('../assets/flags/png/qatar.png'),
     city: 'Doha',
     continent: 'Asia',
-  },
-  {
-    country: 'Reunion',
-    flag: require('../assets/flags/png/aruba.png'),
-    city: 'Saint-Denis',
-    continent: 'Africa',
   },
   {
     country: 'Romania',
@@ -1026,7 +846,7 @@ export const countries = [
     continent: 'Europe',
   },
   {
-    country: 'Russian Federation',
+    country: 'Russia',
     flag: require('../assets/flags/png/russian_federation.png'),
     city: 'Moscow',
     continent: 'Europe',
@@ -1035,12 +855,6 @@ export const countries = [
     country: 'Rwanda',
     flag: require('../assets/flags/png/rwanda.png'),
     city: 'Kigali',
-    continent: 'Africa',
-  },
-  {
-    country: 'Saint Helena',
-    flag: require('../assets/flags/png/aruba.png'),
-    city: 'Jamestown',
     continent: 'Africa',
   },
   {
@@ -1053,12 +867,6 @@ export const countries = [
     country: 'Saint Lucia',
     flag: require('../assets/flags/png/aruba.png'),
     city: 'Castries',
-    continent: 'North America',
-  },
-  {
-    country: 'Saint Pierre and Miquelon',
-    flag: require('../assets/flags/png/aruba.png'),
-    city: 'Saint-Pierre',
     continent: 'North America',
   },
   {
@@ -1090,12 +898,6 @@ export const countries = [
     flag: require('../assets/flags/png/saudi_arabia.png'),
     city: 'Riyadh',
     continent: 'Asia',
-  },
-  {
-    country: 'Scotland',
-    flag: require('../assets/flags/png/scotland.png'),
-    city: 'Edinburgh',
-    continent: 'Europe',
   },
   {
     country: 'Senegal',
@@ -1194,18 +996,6 @@ export const countries = [
     continent: 'South America',
   },
   {
-    country: 'Svalbard and Jan Mayen',
-    flag: require('../assets/flags/png/aruba.png'),
-    city: 'Longyearbyen',
-    continent: 'Europe',
-  },
-  {
-    country: 'Swaziland',
-    flag: require('../assets/flags/png/aruba.png'),
-    city: 'Mbabane',
-    continent: 'Africa',
-  },
-  {
     country: 'Sweden',
     flag: require('../assets/flags/png/sweden.png'),
     city: 'Stockholm',
@@ -1242,7 +1032,7 @@ export const countries = [
     continent: 'Asia',
   },
   {
-    country: 'The Democratic Republic of Congo',
+    country: 'Congo',
     flag: require('../assets/flags/png/congo.png'),
     city: 'Kinshasa',
     continent: 'Africa',
@@ -1252,12 +1042,6 @@ export const countries = [
     flag: require('../assets/flags/png/aruba.png'),
     city: 'Lom',
     continent: 'Africa',
-  },
-  {
-    country: 'Tokelau',
-    flag: require('../assets/flags/png/aruba.png'),
-    city: 'Fakaofo',
-    continent: 'Oceania',
   },
   {
     country: 'Tonga',
@@ -1290,12 +1074,6 @@ export const countries = [
     continent: 'Asia',
   },
   {
-    country: 'Turks and Caicos Islands',
-    flag: require('../assets/flags/png/aruba.png'),
-    city: 'Cockburn Town',
-    continent: 'North America',
-  },
-  {
     country: 'Tuvalu',
     flag: require('../assets/flags/png/aruba.png'),
     city: 'Funafuti',
@@ -1326,7 +1104,7 @@ export const countries = [
     continent: 'Europe',
   },
   {
-    country: 'United States',
+    country: 'United States of America',
     flag: require('../assets/flags/png/united_states.png'),
     city: 'Washington',
     continent: 'North America',
@@ -1360,36 +1138,6 @@ export const countries = [
     flag: require('../assets/flags/png/vietnam.png'),
     city: 'Hanoi',
     continent: 'Asia',
-  },
-  {
-    country: 'Virgin Islands, British',
-    flag: require('../assets/flags/png/aruba.png'),
-    city: 'Road Town',
-    continent: 'Europe',
-  },
-  {
-    country: 'Virgin Islands, U.S.',
-    flag: require('../assets/flags/png/aruba.png'),
-    city: 'Charlotte Amalie',
-    continent: 'North America',
-  },
-  {
-    country: 'Wales',
-    flag: require('../assets/flags/png/wales.png'),
-    city: 'Cardiff',
-    continent: 'Europe',
-  },
-  {
-    country: 'Wallis and Futuna',
-    flag: require('../assets/flags/png/aruba.png'),
-    city: 'Mata-Utu',
-    continent: 'Oceania',
-  },
-  {
-    country: 'Western Sahara',
-    flag: require('../assets/flags/png/aruba.png'),
-    city: 'El-Aai',
-    continent: 'Africa',
   },
   {
     country: 'Yemen',
