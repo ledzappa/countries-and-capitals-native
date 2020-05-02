@@ -6,6 +6,14 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#eee',
   },
+  flag: {
+    width: 10,
+    height: 10,
+  },
+  flagView: {
+    width: 1,
+    height: 100
+  },
   header: {
     marginTop: 20,
     marginBottom: 20,

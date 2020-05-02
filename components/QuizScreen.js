@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {styles} from './../styles/Styles';
-import {ScrollView, Text, TouchableOpacity} from 'react-native';
+import {ScrollView, Text, TouchableOpacity, Image, View} from 'react-native';
 import {countries} from '../assets/countries';
 
 export default class QuizScreen extends Component {
@@ -85,6 +85,13 @@ export default class QuizScreen extends Component {
           Question {this.state.currentQuestion + 1}/
           {this.state.numberOfQuestions + 1}
         </Text>
+        <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+          <Image
+            resizeMode="contain"
+            style={{width: 300, height: 300}}
+            source={this.state.questions[this.state.currentQuestion]?.flag}
+          />
+        </View>
         <Text style={styles.header}>
           {this.state.questions[this.state.currentQuestion]?.country}
         </Text>
