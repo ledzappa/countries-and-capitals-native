@@ -10,6 +10,7 @@ export default class QuizScreen extends Component {
       currentQuestion: 0,
       correctAnswers: 0,
       numberOfQuestions: 0,
+      showAnswer: false,
       questions: [],
       alternatives: [],
     };
@@ -56,18 +57,23 @@ export default class QuizScreen extends Component {
 
   nextQuestion = () => {
     this.setState(
-      {currentQuestion: this.state.currentQuestion + 1},
+      {currentQuestion: this.state.currentQuestion + 1, showAnswer: false},
       this.getAlternatives,
     );
   };
 
   showAnswer = () => {
-    this.setState(
-      {
-        correctAnswers: this.state.correctAnswers + 1,
-      },
-      this.nextQuestion,
-    );
+    if (!this.state.showAnswer) {
+      this.setState({showAnswer: true});
+      setTimeout(() => {
+        this.setState(
+          {
+            correctAnswers: this.state.correctAnswers + 1,
+          },
+          this.nextQuestion,
+        );
+      }, 1000);
+    }
   };
 
   render() {
@@ -84,7 +90,13 @@ export default class QuizScreen extends Component {
         </Text>
         {this.state.alternatives.map(alternative => (
           <TouchableOpacity
-            style={styles.button}
+            style={
+              this.state.showAnswer &&
+              alternative ===
+                this.state.questions[this.state.currentQuestion]?.city
+                ? styles.buttonAnswer
+                : styles.button
+            }
             onPress={() => this.showAnswer()}>
             <Text style={styles.buttonText}>{alternative}</Text>
           </TouchableOpacity>
