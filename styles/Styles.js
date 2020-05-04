@@ -4,19 +4,14 @@ export const styles = StyleSheet.create({
   container: {
     padding: 10,
     flex: 1,
-    backgroundColor: '#eee',
+    backgroundColor: '#f1f1f1',
   },
-  flag: {
-    width: 10,
-    height: 10,
-  },
-  flagView: {
-    width: 1,
-    height: 100
+  scrollView: {
+    backgroundColor: '#f1f1f1',
   },
   header: {
     marginTop: 20,
-    marginBottom: 20,
+    marginBottom: 10,
     textAlign: 'center',
     fontSize: 24,
   },

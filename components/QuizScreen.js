@@ -85,16 +85,22 @@ export default class QuizScreen extends Component {
           Question {this.state.currentQuestion + 1}/
           {this.state.numberOfQuestions + 1}
         </Text>
-        <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-          <Image
-            resizeMode="contain"
-            style={{width: 300, height: 300}}
-            source={this.state.questions[this.state.currentQuestion]?.flag}
-          />
-        </View>
         <Text style={styles.header}>
           {this.state.questions[this.state.currentQuestion]?.country}
         </Text>
+        <View
+          style={{
+            flex: 1,
+            alignItems: 'center',
+            justifyContent: 'center',
+            height: 200,
+          }}>
+          <Image
+            resizeMode="contain"
+            style={{width: 300, height: 150}}
+            source={this.state.questions[this.state.currentQuestion]?.flag}
+          />
+        </View>
         {this.state.alternatives.map(alternative => (
           <TouchableOpacity
             style={
