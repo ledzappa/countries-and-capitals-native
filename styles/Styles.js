@@ -1,5 +1,12 @@
 import {StyleSheet} from 'react-native';
 
+const button = {
+  borderRadius: 10,
+  marginBottom: 10,
+  textAlign: 'center',
+  padding: 10,
+};
+
 export const styles = StyleSheet.create({
   container: {
     padding: 10,
@@ -16,18 +23,16 @@ export const styles = StyleSheet.create({
     fontSize: 24,
   },
   button: {
-    borderRadius: 10,
+    ...button,
     backgroundColor: '#474794',
-    marginBottom: 10,
-    textAlign: 'center',
-    padding: 10,
+  },
+  buttonSecondary: {
+    ...button,
+    backgroundColor: '#999',
   },
   buttonAnswer: {
-    borderRadius: 10,
+    ...button,
     backgroundColor: '#38ad38',
-    marginBottom: 10,
-    textAlign: 'center',
-    padding: 10,
   },
   buttonText: {
     fontWeight: 'bold',

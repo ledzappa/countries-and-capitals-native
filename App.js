@@ -45,6 +45,9 @@ const homeScreen = ({navigation}) => {
       <TouchableOpacity style={styles.button}>
         <Text style={styles.buttonText}>FLAGS</Text>
       </TouchableOpacity>
+      <TouchableOpacity style={styles.buttonSecondary}>
+        <Text style={styles.buttonText}>Settings</Text>
+      </TouchableOpacity>
     </ScrollView>
   );
 };
