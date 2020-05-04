@@ -24,6 +24,7 @@ const continents = [
   'North America',
   'South America',
   'Asia',
+  'Oceania'
 ];
 
 const checkAnswer = () => {

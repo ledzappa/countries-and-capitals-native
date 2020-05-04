@@ -4,17 +4,20 @@ export const styles = StyleSheet.create({
   container: {
     padding: 10,
     flex: 1,
-    backgroundColor: '#eee',
+    backgroundColor: '#f1f1f1',
+  },
+  scrollView: {
+    backgroundColor: '#f1f1f1',
   },
   header: {
     marginTop: 20,
-    marginBottom: 20,
+    marginBottom: 10,
     textAlign: 'center',
     fontSize: 24,
   },
   button: {
     borderRadius: 10,
-    backgroundColor: '#666',
+    backgroundColor: '#474794',
     marginBottom: 10,
     textAlign: 'center',
     padding: 10,
@@ -30,9 +33,6 @@ export const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 20,
     color: '#fff',
-    textShadowColor: 'rgba(0, 0, 0, 0.75)',
-    textShadowOffset: {width: -1, height: 1},
-    textShadowRadius: 10,
     textAlign: 'center',
   },
 });
