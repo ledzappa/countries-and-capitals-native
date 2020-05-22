@@ -32,8 +32,11 @@ export default class QuizScreen extends Component {
   }
 
   getAlternatives = () => {
+    const numberOfAlternatives = parseInt(this.props.route.params.alternatives) - 1;
     let alternatives = [];
-    while (alternatives.length < 3) {
+    while (
+      alternatives.length < numberOfAlternatives
+    ) {
       let randNum = Math.floor(Math.random() * this.state.numberOfQuestions);
       const alternative = this.state.questions[randNum].city;
 

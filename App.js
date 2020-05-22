@@ -8,6 +8,7 @@
 import 'react-native-gesture-handler';
 import {styles} from './styles/Styles';
 import QuizScreen from './components/QuizScreen';
+import SettingsScreen from './components/SettingsScreen';
 
 import React from 'react';
 import {SafeAreaView, ScrollView, Text, TouchableOpacity} from 'react-native';
@@ -24,14 +25,15 @@ const continents = [
   'North America',
   'South America',
   'Asia',
-  'Oceania'
+  'Oceania',
 ];
 
 const checkAnswer = () => {
   console.log('check answer!');
 };
 
-const homeScreen = ({navigation}) => {
+const homeScreen = ({navigation, route}) => {
+  const alternatives = route.params?.alternatives || 4;
   return (
     <ScrollView
       contentInsetAdjustmentBehavior="automatic"
@@ -39,17 +41,22 @@ const homeScreen = ({navigation}) => {
       <Text style={styles.header}>Quiz me on:</Text>
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate('ContinentSelect')}>
+        onPress={() => navigation.navigate('ContinentSelect', {alternatives})}>
         <Text style={styles.buttonText}>CAPITALS</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.button}>
         <Text style={styles.buttonText}>FLAGS</Text>
       </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.buttonSecondary}
+        onPress={() => navigation.navigate('SettingsScreen', {alternatives})}>
+        <Text style={styles.buttonText}>Settings</Text>
+      </TouchableOpacity>
     </ScrollView>
   );
 };
 
-const continentSelectScreen = ({navigation}) => {
+const continentSelectScreen = ({navigation, route}) => {
   return (
     <ScrollView
       contentInsetAdjustmentBehavior="automatic"
@@ -58,7 +65,12 @@ const continentSelectScreen = ({navigation}) => {
       {continents.map(continent => (
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate('QuizScreen', { continent })}>
+          onPress={() =>
+            navigation.navigate('QuizScreen', {
+              continent,
+              alternatives: route.params.alternatives,
+            })
+          }>
           <Text style={styles.buttonText}>{continent}</Text>
         </TouchableOpacity>
       ))}
@@ -77,6 +89,7 @@ const App: () => React$Node = () => {
             component={continentSelectScreen}
           />
           <Stack.Screen name="QuizScreen" component={QuizScreen} />
+          <Stack.Screen name="SettingsScreen" component={SettingsScreen} />
         </Stack.Navigator>
       </SafeAreaView>
     </NavigationContainer>
