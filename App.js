@@ -41,10 +41,19 @@ const homeScreen = ({navigation, route}) => {
       <Text style={styles.header}>Quiz me on:</Text>
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate('ContinentSelect', {alternatives})}>
+        onPress={() =>
+          navigation.navigate('ContinentSelect', {
+            alternatives,
+            mode: 'capitals',
+          })
+        }>
         <Text style={styles.buttonText}>CAPITALS</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() =>
+          navigation.navigate('ContinentSelect', {alternatives, mode: 'flags'})
+        }>
         <Text style={styles.buttonText}>FLAGS</Text>
       </TouchableOpacity>
       <TouchableOpacity
@@ -68,6 +77,7 @@ const continentSelectScreen = ({navigation, route}) => {
           onPress={() =>
             navigation.navigate('QuizScreen', {
               continent,
+              mode: route.params.mode,
               alternatives: route.params.alternatives,
             })
           }>
