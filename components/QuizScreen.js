@@ -77,7 +77,6 @@ export default class QuizScreen extends Component {
       {currentQuestion: this.state.currentQuestion + 1, showAnswer: false},
       this.getAlternatives,
     );
-    this.restartTimer();
   };
 
   restartTimer() {
@@ -105,6 +104,7 @@ export default class QuizScreen extends Component {
         );
       }, 1000);
     }
+    this.restartTimer();
   };
 
   render() {
