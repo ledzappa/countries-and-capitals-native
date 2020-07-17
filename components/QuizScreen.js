@@ -45,10 +45,7 @@ export default class QuizScreen extends Component {
     const numberOfAlternatives =
       parseInt(this.props.route.params.alternatives) - 1;
     let alternatives = [];
-<<<<<<< HEAD
 
-=======
->>>>>>> master
     while (alternatives.length < numberOfAlternatives) {
       let randNum = Math.floor(Math.random() * this.state.numberOfQuestions);
       const alternative = this.state.questions[randNum][
@@ -116,17 +113,12 @@ export default class QuizScreen extends Component {
         contentInsetAdjustmentBehavior="automatic"
         style={styles.scrollView}>
         <Text>
-<<<<<<< HEAD
-          Question {this.state.currentQuestion}/
-          {this.state.numberOfQuestions}
-=======
           Question {this.state.currentQuestion + 1}/
           {this.state.numberOfQuestions + 1}
         </Text>
         <Text>Time: {this.state.timeLeft}s</Text>
         <Text style={styles.header}>
           {this.state.questions[this.state.currentQuestion]?.country}
->>>>>>> master
         </Text>
         {this.props.route.params.mode === 'capitals' && (
           <Text style={styles.header}>
