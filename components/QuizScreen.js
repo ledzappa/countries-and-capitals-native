@@ -10,11 +10,13 @@ export default class QuizScreen extends Component {
       currentQuestion: 1,
       correctAnswers: 0,
       numberOfQuestions: 0,
+      timeLeft: 10,
       showAnswer: false,
       questions: [],
       alternatives: [],
       alternativeType: '',
     };
+    this.timer = null;
   }
 
   componentDidMount() {
@@ -30,15 +32,23 @@ export default class QuizScreen extends Component {
         numberOfQuestions: res.length,
         questions: res,
       },
-      this.getAlternatives,
+      this.startRound,
     );
   }
+
+  startRound = () => {
+    this.getAlternatives();
+    this.restartTimer();
+  };
 
   getAlternatives = () => {
     const numberOfAlternatives =
       parseInt(this.props.route.params.alternatives) - 1;
     let alternatives = [];
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
     while (alternatives.length < numberOfAlternatives) {
       let randNum = Math.floor(Math.random() * this.state.numberOfQuestions);
       const alternative = this.state.questions[randNum][
@@ -70,7 +80,19 @@ export default class QuizScreen extends Component {
       {currentQuestion: this.state.currentQuestion + 1, showAnswer: false},
       this.getAlternatives,
     );
+    this.restartTimer();
   };
+
+  restartTimer() {
+    clearInterval(this.timer);
+    this.setState({timeLeft: 10});
+    this.timer = setInterval(() => {
+      this.setState({timeLeft: this.state.timeLeft - 1});
+      if (this.state.timeLeft === 0) {
+        this.nextQuestion();
+      }
+    }, 1000);
+  }
 
   showAnswer = () => {
     if (!this.state.showAnswer) {
@@ -94,8 +116,17 @@ export default class QuizScreen extends Component {
         contentInsetAdjustmentBehavior="automatic"
         style={styles.scrollView}>
         <Text>
+<<<<<<< HEAD
           Question {this.state.currentQuestion}/
           {this.state.numberOfQuestions}
+=======
+          Question {this.state.currentQuestion + 1}/
+          {this.state.numberOfQuestions + 1}
+        </Text>
+        <Text>Time: {this.state.timeLeft}s</Text>
+        <Text style={styles.header}>
+          {this.state.questions[this.state.currentQuestion]?.country}
+>>>>>>> master
         </Text>
         {this.props.route.params.mode === 'capitals' && (
           <Text style={styles.header}>
@@ -132,5 +163,9 @@ export default class QuizScreen extends Component {
         ))}
       </ScrollView>
     );
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timer);
   }
 }
