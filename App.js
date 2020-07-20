@@ -10,24 +10,22 @@ import {styles} from './styles/Styles';
 import QuizScreen from './components/QuizScreen';
 import SettingsScreen from './components/SettingsScreen';
 import ScoreScreen from './components/ScoreScreen';
+import {countries} from './assets/countries';
 
 import React from 'react';
-import {SafeAreaView, ScrollView, TouchableOpacity} from 'react-native';
+import {SafeAreaView, ScrollView} from 'react-native';
 
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import {Button, Text, Divider} from 'react-native-elements';
+import {Button, Text} from 'react-native-elements';
 
 const Stack = createStackNavigator();
 
-const continents = [
-  'Europe',
-  'Africa',
-  'North America',
-  'South America',
-  'Asia',
-  'Oceania',
-];
+const continents = countries.reduce(
+  (prev, curr) =>
+    prev.includes(curr.continent) ? prev : [...prev, curr.continent],
+  [],
+);
 
 const homeScreen = ({navigation, route}) => {
   const settings = route.params?.settings || {alternatives: 4, timer: -1};
@@ -57,7 +55,10 @@ const homeScreen = ({navigation, route}) => {
         title="CAPITALS AND FLAGS"
         buttonStyle={styles.button}
         onPress={() =>
-          navigation.navigate('ContinentSelect', {settings, mode: 'capitalsAndFlags'})
+          navigation.navigate('ContinentSelect', {
+            settings,
+            mode: 'capitalsAndFlags',
+          })
         }
       />
       <Button

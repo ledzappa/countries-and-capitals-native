@@ -181,7 +181,7 @@ export default class QuizScreen extends Component {
                 this.state.questions[this.state.currentQuestionNumber - 1]
                   ?.country +
                 '?'
-              : 'This flag belongs to?'}
+              : 'What country does this flag belong to?'}
           </Text>
 
           <View

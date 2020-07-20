@@ -18,7 +18,7 @@ export const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 10,
     textAlign: 'center',
-    fontSize: 24,
+    fontSize: 20,
   },
   headerSecondary: {
     marginBottom: 10,

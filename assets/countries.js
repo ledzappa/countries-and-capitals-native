@@ -1157,4 +1157,28 @@ export const countries = [
     city: 'Harare',
     continent: 'Africa',
   },
+  {
+    country: 'Test Country 4',
+    flag: require('../assets/flags/png/zimbabwe.png'),
+    city: 'Test City 4',
+    continent: 'Test',
+  },
+  {
+    country: 'Test Country 3',
+    flag: require('../assets/flags/png/zimbabwe.png'),
+    city: 'Test City 3',
+    continent: 'Test',
+  },
+  {
+    country: 'Test Country 2',
+    flag: require('../assets/flags/png/zimbabwe.png'),
+    city: 'Test City 2',
+    continent: 'Test',
+  },
+  {
+    country: 'Test Country 1',
+    flag: require('../assets/flags/png/zimbabwe.png'),
+    city: 'Test City 1',
+    continent: 'Test',
+  },
 ];
