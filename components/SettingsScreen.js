@@ -1,40 +1,73 @@
 import React, {Component} from 'react';
 import {Text, View} from 'react-native';
-import {ButtonGroup} from 'react-native-elements';
+import {ButtonGroup, Button} from 'react-native-elements';
 
 export default class SettingsScreen extends Component {
   constructor() {
     super();
-    this.buttons = [4, 6, 8];
+    this.buttonsAlternatives = [4, 6, 8];
+    this.buttonsTimer = ['Off', '5s', '10s', '15s', '20s'];
+    this.buttonsTimerVal = [-1, 5, 10, 15, 20];
     this.state = {
-      selectedIndex: 0,
+      selectedIndexAlternatives: 0,
+      selectedIndexTimer: 0,
+      timer: false,
     };
-    this.updateIndex = this.updateIndex.bind(this);
+    this.updateIndexAlternatives = this.updateIndexAlternatives.bind(this);
+    this.updateIndexTimer = this.updateIndexTimer.bind(this);
   }
 
   componentDidMount() {
     this.setState({
-      selectedIndex: this.buttons.indexOf(this.props.route.params.alternatives),
+      selectedIndexAlternatives: this.buttonsAlternatives.indexOf(
+        this.props.route.params.settings.alternatives,
+      ),
+      selectedIndexTimer: this.buttonsTimerVal.indexOf(
+        this.props.route.params.settings.timer,
+      ),
+      timer: false,
     });
   }
 
-  updateIndex(selectedIndex) {
-    this.props.navigation.navigate('Home', {
-      alternatives: this.buttons[selectedIndex],
-    });
-    this.setState({selectedIndex});
+  updateIndexAlternatives(selectedIndexAlternatives) {
+    this.setState({selectedIndexAlternatives});
+  }
+
+  updateIndexTimer(selectedIndexTimer) {
+    this.setState({selectedIndexTimer});
   }
 
   render() {
-    const {selectedIndex} = this.state;
+    const {selectedIndexAlternatives, selectedIndexTimer} = this.state;
     return (
       <View>
         <Text>Number of alternatives:</Text>
         <ButtonGroup
-          onPress={this.updateIndex}
-          selectedIndex={selectedIndex}
-          buttons={this.buttons}
-          containerStyle={{height: 100}}
+          onPress={this.updateIndexAlternatives}
+          selectedIndex={selectedIndexAlternatives}
+          buttons={this.buttonsAlternatives}
+          containerStyle={{height: 50}}
+        />
+        <Text>Timer:</Text>
+        <ButtonGroup
+          onPress={this.updateIndexTimer}
+          selectedIndex={selectedIndexTimer}
+          buttons={this.buttonsTimer}
+          containerStyle={{height: 50}}
+        />
+        <Button
+          title="Done"
+          buttonStyle={{marginTop: 40}}
+          onPress={() =>
+            this.props.navigation.navigate('Home', {
+              settings: {
+                alternatives: this.buttonsAlternatives[
+                  selectedIndexAlternatives
+                ],
+                timer: this.buttonsTimerVal[selectedIndexTimer],
+              },
+            })
+          }
         />
       </View>
     );

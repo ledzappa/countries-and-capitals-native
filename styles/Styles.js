@@ -1,10 +1,8 @@
 import {StyleSheet} from 'react-native';
 
 const button = {
-  borderRadius: 10,
-  marginBottom: 10,
-  textAlign: 'center',
-  padding: 10,
+  marginBottom: 5,
+  textAlign: 'center'
 };
 
 export const styles = StyleSheet.create({
@@ -17,14 +15,18 @@ export const styles = StyleSheet.create({
     backgroundColor: '#f1f1f1',
   },
   header: {
-    marginTop: 20,
+    marginTop: 10,
     marginBottom: 10,
     textAlign: 'center',
     fontSize: 24,
   },
+  headerSecondary: {
+    marginBottom: 10,
+    textAlign: 'center',
+    fontSize: 20,
+  },
   button: {
-    ...button,
-    backgroundColor: '#474794',
+    ...button
   },
   buttonSecondary: {
     ...button,

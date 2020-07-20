@@ -9,13 +9,14 @@ import 'react-native-gesture-handler';
 import {styles} from './styles/Styles';
 import QuizScreen from './components/QuizScreen';
 import SettingsScreen from './components/SettingsScreen';
+import ScoreScreen from './components/ScoreScreen';
 
 import React from 'react';
-import {SafeAreaView, ScrollView, Text, TouchableOpacity} from 'react-native';
+import {SafeAreaView, ScrollView, TouchableOpacity} from 'react-native';
 
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-// import {Home} from './components/Home';
+import {Button, Text, Divider} from 'react-native-elements';
 
 const Stack = createStackNavigator();
 
@@ -28,39 +29,35 @@ const continents = [
   'Oceania',
 ];
 
-const checkAnswer = () => {
-  console.log('check answer!');
-};
-
 const homeScreen = ({navigation, route}) => {
-  const alternatives = route.params?.alternatives || 4;
+  const settings = route.params?.settings || {alternatives: 4, timer: -1};
   return (
     <ScrollView
       contentInsetAdjustmentBehavior="automatic"
       style={styles.scrollView}>
-      <Text style={styles.header}>Quiz me on:</Text>
-      <TouchableOpacity
-        style={styles.button}
+      <Text h4>Quiz me on:</Text>
+      <Button
+        title="CAPITALS"
+        buttonStyle={styles.button}
         onPress={() =>
           navigation.navigate('ContinentSelect', {
-            alternatives,
+            settings,
             mode: 'capitals',
           })
-        }>
-        <Text style={styles.buttonText}>CAPITALS</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.button}
+        }
+      />
+      <Button
+        title="FLAGS"
+        buttonStyle={styles.button}
         onPress={() =>
-          navigation.navigate('ContinentSelect', {alternatives, mode: 'flags'})
-        }>
-        <Text style={styles.buttonText}>FLAGS</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.buttonSecondary}
-        onPress={() => navigation.navigate('SettingsScreen', {alternatives})}>
-        <Text style={styles.buttonText}>Settings</Text>
-      </TouchableOpacity>
+          navigation.navigate('ContinentSelect', {settings, mode: 'flags'})
+        }
+      />
+      <Button
+        title="SETTINGS"
+        buttonStyle={styles.button}
+        onPress={() => navigation.navigate('SettingsScreen', {settings})}
+      />
     </ScrollView>
   );
 };
@@ -70,19 +67,19 @@ const continentSelectScreen = ({navigation, route}) => {
     <ScrollView
       contentInsetAdjustmentBehavior="automatic"
       style={styles.scrollView}>
-      <Text style={styles.header}>Choose continent:</Text>
+      <Text h4>Choose continent:</Text>
       {continents.map(continent => (
-        <TouchableOpacity
-          style={styles.button}
+        <Button
+          title={continent}
+          buttonStyle={styles.button}
           onPress={() =>
             navigation.navigate('QuizScreen', {
               continent,
               mode: route.params.mode,
-              alternatives: route.params.alternatives,
+              settings: route.params.settings,
             })
-          }>
-          <Text style={styles.buttonText}>{continent}</Text>
-        </TouchableOpacity>
+          }
+        />
       ))}
     </ScrollView>
   );
@@ -100,6 +97,7 @@ const App: () => React$Node = () => {
           />
           <Stack.Screen name="QuizScreen" component={QuizScreen} />
           <Stack.Screen name="SettingsScreen" component={SettingsScreen} />
+          <Stack.Screen name="ScoreScreen" component={ScoreScreen} />
         </Stack.Navigator>
       </SafeAreaView>
     </NavigationContainer>

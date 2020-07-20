@@ -1,39 +1,42 @@
 import React, {Component} from 'react';
 import {styles} from './../styles/Styles';
-import {ScrollView, Text, TouchableOpacity, Image, View} from 'react-native';
+import {ScrollView, Text, Image, View} from 'react-native';
+import {Button} from 'react-native-elements';
 import {countries} from '../assets/countries';
 
 export default class QuizScreen extends Component {
   constructor() {
     super();
     this.state = {
-      currentQuestion: 1,
-      correctAnswers: 0,
-      numberOfQuestions: 0,
+      currentQuestionNumber: 1,
       timeLeft: 10,
       showAnswer: false,
       questions: [],
+      answers: [],
       alternatives: [],
       alternativeType: '',
     };
     this.timer = null;
+    this.t1 = null;
   }
 
   componentDidMount() {
-    let res = countries.filter(
-      x => x.continent === this.props.route.params.continent,
+    let res = this.shuffleArray(
+      countries.filter(x => x.continent === this.props.route.params.continent),
     );
 
     this.setState(
       {
-        continent: this.props.params,
         alternativeType:
           this.props.route.params.mode === 'capitals' ? 'city' : 'country',
-        numberOfQuestions: res.length,
         questions: res,
       },
       this.startRound,
     );
+  }
+
+  componentWillUnmount() {
+    this.clearAllTimers();
   }
 
   startRound = () => {
@@ -43,18 +46,18 @@ export default class QuizScreen extends Component {
 
   getAlternatives = () => {
     const numberOfAlternatives =
-      parseInt(this.props.route.params.alternatives) - 1;
+      parseInt(this.props.route.params.settings.alternatives) - 1;
     let alternatives = [];
 
     while (alternatives.length < numberOfAlternatives) {
-      let randNum = Math.floor(Math.random() * this.state.numberOfQuestions);
+      let randNum = Math.floor(Math.random() * this.state.questions.length);
       const alternative = this.state.questions[randNum][
         this.state.alternativeType
       ];
 
       if (
         alternatives.indexOf(alternative) === -1 &&
-        randNum !== this.state.currentQuestion - 1
+        randNum !== this.state.currentQuestionNumber - 1
       ) {
         alternatives = [...alternatives, alternative];
       }
@@ -64,7 +67,7 @@ export default class QuizScreen extends Component {
     alternatives.splice(
       Math.floor(Math.random() * (alternatives.length + 1)),
       0,
-      this.state.questions[this.state.currentQuestion - 1][
+      this.state.questions[this.state.currentQuestionNumber - 1][
         this.state.alternativeType
       ],
     );
@@ -73,41 +76,75 @@ export default class QuizScreen extends Component {
   };
 
   nextQuestion = () => {
+    this.restartTimer();
     this.setState(
-      {currentQuestion: this.state.currentQuestion + 1, showAnswer: false},
+      {
+        currentQuestionNumber: this.state.currentQuestionNumber + 1,
+        showAnswer: false,
+      },
       this.getAlternatives,
     );
   };
 
   restartTimer() {
-    clearInterval(this.timer);
-    this.setState({timeLeft: 10});
-    setTimeout(() => {
+    if (this.props.route.params.settings.timer > -1) {
+      this.setState({timeLeft: this.props.route.params.settings.timer});
       this.timer = setInterval(() => {
         this.setState({timeLeft: this.state.timeLeft - 1});
         if (this.state.timeLeft === 0) {
-          this.nextQuestion();
-          this.restartTimer();
+          this.showAnswer('Time-out');
         }
       }, 1000);
-    }, 1000);
+    }
   }
 
-  showAnswer = () => {
+  showAnswer = answer => {
+    clearInterval(this.timer);
     if (!this.state.showAnswer) {
       this.setState({showAnswer: true});
-      setTimeout(() => {
+      this.t1 = setTimeout(() => {
         this.setState(
           {
-            correctAnswers: this.state.correctAnswers + 1,
+            answers: [
+              ...this.state.answers,
+              {
+                answer,
+                correctAnswer: this.state.questions[
+                  this.state.currentQuestionNumber - 1
+                ][this.state.alternativeType],
+                country: this.state.questions[
+                  this.state.currentQuestionNumber - 1
+                ]?.country,
+              },
+            ],
           },
-          this.state.currentQuestion !== this.state.numberOfQuestions
+          this.state.currentQuestionNumber !== this.state.questions.length
             ? this.nextQuestion
-            : this.props.navigation.navigate('Home'),
+            : this.completeRound,
         );
       }, 1000);
     }
   };
+
+  completeRound() {
+    this.clearAllTimers();
+    this.props.navigation.navigate('ScoreScreen', {
+      answers: this.state.answers,
+    });
+  }
+
+  shuffleArray(a) {
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+  clearAllTimers() {
+    clearInterval(this.timer);
+    clearTimeout(this.t1);
+  }
 
   render() {
     return (
@@ -115,15 +152,20 @@ export default class QuizScreen extends Component {
         contentInsetAdjustmentBehavior="automatic"
         style={styles.scrollView}>
         <Text>
-          Question {this.state.currentQuestion + 1}/
-          {this.state.numberOfQuestions + 1}
+          Question {this.state.currentQuestionNumber}/
+          {this.state.questions.length}
         </Text>
-        <Text>Time: {this.state.timeLeft}s</Text>
-        {this.props.route.params.mode === 'capitals' && (
-          <Text style={styles.header}>
-            {this.state.questions[this.state.currentQuestion - 1]?.country}
-          </Text>
+        {this.props.route.params.settings.timer > -1 && (
+          <Text>Time: {this.state.timeLeft}s</Text>
         )}
+        
+          <Text style={styles.header}>
+            {
+              this.props.route.params.mode === 'capitals' ? this.state.questions[this.state.currentQuestionNumber - 1]
+                ?.country : 'Whos flag is it?'
+            }
+          </Text>
+      
         <View
           style={{
             flex: 1,
@@ -134,32 +176,29 @@ export default class QuizScreen extends Component {
           <Image
             resizeMode="contain"
             style={{width: 300, height: 150}}
-            source={this.state.questions[this.state.currentQuestion - 1]?.flag}
+            source={
+              this.state.questions[this.state.currentQuestionNumber - 1]?.flag
+            }
           />
         </View>
         {this.state.alternatives.map(alternative => (
-          <TouchableOpacity
-            style={
+          <Button
+            title={alternative}
+            buttonStyle={
               this.state.showAnswer &&
               alternative ===
-                this.state.questions[this.state.currentQuestion - 1][
+                this.state.questions[this.state.currentQuestionNumber - 1][
                   this.state.alternativeType
                 ]
                 ? styles.buttonAnswer
                 : styles.button
             }
             onPress={() => {
-              this.showAnswer();
-              this.restartTimer();
-            }}>
-            <Text style={styles.buttonText}>{alternative}</Text>
-          </TouchableOpacity>
+              this.showAnswer(alternative);
+            }}
+          />
         ))}
       </ScrollView>
     );
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.timer);
   }
 }
