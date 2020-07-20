@@ -148,57 +148,61 @@ export default class QuizScreen extends Component {
 
   render() {
     return (
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={styles.scrollView}>
-        <Text>
-          Question {this.state.currentQuestionNumber}/
-          {this.state.questions.length}
-        </Text>
-        {this.props.route.params.settings.timer > -1 && (
-          <Text>Time: {this.state.timeLeft}s</Text>
-        )}
-        
-          <Text style={styles.header}>
-            {
-              this.props.route.params.mode === 'capitals' ? this.state.questions[this.state.currentQuestionNumber - 1]
-                ?.country : 'Whos flag is it?'
-            }
+      <View style={{flex: 1}}>
+        <ScrollView
+          contentInsetAdjustmentBehavior="automatic"
+          style={styles.scrollView}>
+          <Text>
+            Question {this.state.currentQuestionNumber}/
+            {this.state.questions.length}
           </Text>
-      
-        <View
-          style={{
-            flex: 1,
-            alignItems: 'center',
-            justifyContent: 'center',
-            height: 200,
-          }}>
-          <Image
-            resizeMode="contain"
-            style={{width: 300, height: 150}}
-            source={
-              this.state.questions[this.state.currentQuestionNumber - 1]?.flag
-            }
-          />
+          {this.props.route.params.settings.timer > -1 && (
+            <Text>Time: {this.state.timeLeft}s</Text>
+          )}
+
+          <Text style={styles.header}>
+            {this.props.route.params.mode === 'capitals'
+              ? 'What\'s the capital of ' + this.state.questions[this.state.currentQuestionNumber - 1]
+                  ?.country + '?'
+              : 'This flag belongs to?'}
+          </Text>
+
+          <View
+            style={{
+              flex: 1,
+              alignItems: 'center',
+              justifyContent: 'center',
+              height: 200,
+            }}>
+            <Image
+              resizeMode="contain"
+              style={{width: 300, height: 150}}
+              source={
+                this.state.questions[this.state.currentQuestionNumber - 1]?.flag
+              }
+            />
+          </View>
+        </ScrollView>
+        <View>
+          {this.state.alternatives.map(alternative => (
+            <Button
+              title={alternative}
+              buttonStyle={
+                this.state.showAnswer &&
+                alternative ===
+                  this.state.questions[this.state.currentQuestionNumber - 1][
+                    this.state.alternativeType
+                  ]
+                  ? styles.buttonAnswer
+                  : styles.buttonQuiz
+              }
+              onPress={() => {
+                this.showAnswer(alternative);
+              }}
+            />
+          ))}
         </View>
-        {this.state.alternatives.map(alternative => (
-          <Button
-            title={alternative}
-            buttonStyle={
-              this.state.showAnswer &&
-              alternative ===
-                this.state.questions[this.state.currentQuestionNumber - 1][
-                  this.state.alternativeType
-                ]
-                ? styles.buttonAnswer
-                : styles.button
-            }
-            onPress={() => {
-              this.showAnswer(alternative);
-            }}
-          />
-        ))}
-      </ScrollView>
+      </View>
     );
   }
 }

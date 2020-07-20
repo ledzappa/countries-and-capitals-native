@@ -2,7 +2,7 @@ import {StyleSheet} from 'react-native';
 
 const button = {
   marginBottom: 5,
-  textAlign: 'center'
+  textAlign: 'center',
 };
 
 export const styles = StyleSheet.create({
@@ -26,12 +26,13 @@ export const styles = StyleSheet.create({
     fontSize: 20,
   },
   button: {
-    ...button
+    ...button,
   },
   buttonSecondary: {
     ...button,
     backgroundColor: '#999',
   },
+  buttonQuiz: {...button, backgroundColor: '#444'},
   buttonAnswer: {
     ...button,
     backgroundColor: '#38ad38',
