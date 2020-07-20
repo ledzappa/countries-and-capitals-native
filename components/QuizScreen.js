@@ -16,23 +16,37 @@ export default class QuizScreen extends Component {
       alternatives: [],
       alternativeType: '',
     };
+    this.alternativeTypes = {
+      flags: 'country',
+      capitals: 'city',
+    };
     this.timer = null;
     this.t1 = null;
   }
 
   componentDidMount() {
-    let res = this.shuffleArray(
-      countries.filter(x => x.continent === this.props.route.params.continent),
-    );
-
+    this.setAlternativeType();
     this.setState(
       {
-        alternativeType:
-          this.props.route.params.mode === 'capitals' ? 'city' : 'country',
-        questions: res,
+        questions: this.shuffleArray(
+          countries.filter(
+            x => x.continent === this.props.route.params.continent,
+          ),
+        ),
       },
       this.startRound,
     );
+  }
+
+  setAlternativeType() {
+    this.setState({
+      alternativeType:
+        this.props.route.params.mode === 'capitalsAndFlags'
+          ? Math.random() > 0.5
+            ? 'city'
+            : 'country'
+          : this.alternativeTypes[this.props.route.params.mode],
+    });
   }
 
   componentWillUnmount() {
@@ -77,6 +91,7 @@ export default class QuizScreen extends Component {
 
   nextQuestion = () => {
     this.restartTimer();
+    this.setAlternativeType();
     this.setState(
       {
         currentQuestionNumber: this.state.currentQuestionNumber + 1,
@@ -161,9 +176,11 @@ export default class QuizScreen extends Component {
           )}
 
           <Text style={styles.header}>
-            {this.props.route.params.mode === 'capitals'
-              ? 'What\'s the capital of ' + this.state.questions[this.state.currentQuestionNumber - 1]
-                  ?.country + '?'
+            {this.state.alternativeType === 'city'
+              ? "What's the capital of " +
+                this.state.questions[this.state.currentQuestionNumber - 1]
+                  ?.country +
+                '?'
               : 'This flag belongs to?'}
           </Text>
 

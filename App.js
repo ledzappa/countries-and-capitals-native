@@ -54,6 +54,13 @@ const homeScreen = ({navigation, route}) => {
         }
       />
       <Button
+        title="CAPITALS AND FLAGS"
+        buttonStyle={styles.button}
+        onPress={() =>
+          navigation.navigate('ContinentSelect', {settings, mode: 'capitalsAndFlags'})
+        }
+      />
+      <Button
         title="SETTINGS"
         buttonStyle={styles.button}
         onPress={() => navigation.navigate('SettingsScreen', {settings})}
