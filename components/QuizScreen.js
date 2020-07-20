@@ -7,13 +7,14 @@ export default class QuizScreen extends Component {
   constructor() {
     super();
     this.state = {
-      currentQuestion: 0,
+      currentQuestion: 1,
       correctAnswers: 0,
       numberOfQuestions: 0,
       timeLeft: 10,
       showAnswer: false,
       questions: [],
       alternatives: [],
+      alternativeType: '',
     };
     this.timer = null;
   }
@@ -26,6 +27,8 @@ export default class QuizScreen extends Component {
     this.setState(
       {
         continent: this.props.params,
+        alternativeType:
+          this.props.route.params.mode === 'capitals' ? 'city' : 'country',
         numberOfQuestions: res.length,
         questions: res,
       },
@@ -42,13 +45,16 @@ export default class QuizScreen extends Component {
     const numberOfAlternatives =
       parseInt(this.props.route.params.alternatives) - 1;
     let alternatives = [];
+
     while (alternatives.length < numberOfAlternatives) {
       let randNum = Math.floor(Math.random() * this.state.numberOfQuestions);
-      const alternative = this.state.questions[randNum].city;
+      const alternative = this.state.questions[randNum][
+        this.state.alternativeType
+      ];
 
       if (
         alternatives.indexOf(alternative) === -1 &&
-        randNum !== this.state.currentQuestion
+        randNum !== this.state.currentQuestion - 1
       ) {
         alternatives = [...alternatives, alternative];
       }
@@ -58,7 +64,9 @@ export default class QuizScreen extends Component {
     alternatives.splice(
       Math.floor(Math.random() * (alternatives.length + 1)),
       0,
-      this.state.questions[this.state.currentQuestion]?.city,
+      this.state.questions[this.state.currentQuestion - 1][
+        this.state.alternativeType
+      ],
     );
 
     this.setState({alternatives: alternatives});
@@ -69,17 +77,19 @@ export default class QuizScreen extends Component {
       {currentQuestion: this.state.currentQuestion + 1, showAnswer: false},
       this.getAlternatives,
     );
-    this.restartTimer();
   };
 
   restartTimer() {
     clearInterval(this.timer);
     this.setState({timeLeft: 10});
-    this.timer = setInterval(() => {
-      this.setState({timeLeft: this.state.timeLeft - 1});
-      if (this.state.timeLeft === 0) {
-        this.nextQuestion();
-      }
+    setTimeout(() => {
+      this.timer = setInterval(() => {
+        this.setState({timeLeft: this.state.timeLeft - 1});
+        if (this.state.timeLeft === 0) {
+          this.nextQuestion();
+          this.restartTimer();
+        }
+      }, 1000);
     }, 1000);
   }
 
@@ -91,7 +101,9 @@ export default class QuizScreen extends Component {
           {
             correctAnswers: this.state.correctAnswers + 1,
           },
-          this.nextQuestion,
+          this.state.currentQuestion !== this.state.numberOfQuestions
+            ? this.nextQuestion
+            : this.props.navigation.navigate('Home'),
         );
       }, 1000);
     }
@@ -107,9 +119,11 @@ export default class QuizScreen extends Component {
           {this.state.numberOfQuestions + 1}
         </Text>
         <Text>Time: {this.state.timeLeft}s</Text>
-        <Text style={styles.header}>
-          {this.state.questions[this.state.currentQuestion]?.country}
-        </Text>
+        {this.props.route.params.mode === 'capitals' && (
+          <Text style={styles.header}>
+            {this.state.questions[this.state.currentQuestion - 1]?.country}
+          </Text>
+        )}
         <View
           style={{
             flex: 1,
@@ -120,7 +134,7 @@ export default class QuizScreen extends Component {
           <Image
             resizeMode="contain"
             style={{width: 300, height: 150}}
-            source={this.state.questions[this.state.currentQuestion]?.flag}
+            source={this.state.questions[this.state.currentQuestion - 1]?.flag}
           />
         </View>
         {this.state.alternatives.map(alternative => (
@@ -128,11 +142,16 @@ export default class QuizScreen extends Component {
             style={
               this.state.showAnswer &&
               alternative ===
-                this.state.questions[this.state.currentQuestion]?.city
+                this.state.questions[this.state.currentQuestion - 1][
+                  this.state.alternativeType
+                ]
                 ? styles.buttonAnswer
                 : styles.button
             }
-            onPress={() => this.showAnswer()}>
+            onPress={() => {
+              this.showAnswer();
+              this.restartTimer();
+            }}>
             <Text style={styles.buttonText}>{alternative}</Text>
           </TouchableOpacity>
         ))}
