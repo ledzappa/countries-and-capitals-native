@@ -82,11 +82,14 @@ export default class QuizScreen extends Component {
   restartTimer() {
     clearInterval(this.timer);
     this.setState({timeLeft: 10});
-    this.timer = setInterval(() => {
-      this.setState({timeLeft: this.state.timeLeft - 1});
-      if (this.state.timeLeft === 0) {
-        this.nextQuestion();
-      }
+    setTimeout(() => {
+      this.timer = setInterval(() => {
+        this.setState({timeLeft: this.state.timeLeft - 1});
+        if (this.state.timeLeft === 0) {
+          this.nextQuestion();
+          this.restartTimer();
+        }
+      }, 1000);
     }, 1000);
   }
 
@@ -104,7 +107,6 @@ export default class QuizScreen extends Component {
         );
       }, 1000);
     }
-    this.restartTimer();
   };
 
   render() {
@@ -117,9 +119,6 @@ export default class QuizScreen extends Component {
           {this.state.numberOfQuestions + 1}
         </Text>
         <Text>Time: {this.state.timeLeft}s</Text>
-        <Text style={styles.header}>
-          {this.state.questions[this.state.currentQuestion]?.country}
-        </Text>
         {this.props.route.params.mode === 'capitals' && (
           <Text style={styles.header}>
             {this.state.questions[this.state.currentQuestion - 1]?.country}
@@ -149,7 +148,10 @@ export default class QuizScreen extends Component {
                 ? styles.buttonAnswer
                 : styles.button
             }
-            onPress={() => this.showAnswer()}>
+            onPress={() => {
+              this.showAnswer();
+              this.restartTimer();
+            }}>
             <Text style={styles.buttonText}>{alternative}</Text>
           </TouchableOpacity>
         ))}
