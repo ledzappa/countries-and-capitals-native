@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
-import {styles} from './../styles/Styles';
-import {ScrollView, Text, TouchableOpacity, Image, View} from 'react-native';
-import {countries} from '../assets/countries';
+import React, { Component } from 'react';
+import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { countries } from '../assets/countries';
+import { styles } from './../styles/Styles';
 
 export default class QuizScreen extends Component {
   constructor() {
@@ -21,7 +21,7 @@ export default class QuizScreen extends Component {
 
   componentDidMount() {
     let res = countries.filter(
-      x => x.continent === this.props.route.params.continent,
+      (x) => x.continent === this.props.route.params.continent
     );
 
     this.setState(
@@ -32,7 +32,7 @@ export default class QuizScreen extends Component {
         numberOfQuestions: res.length,
         questions: res,
       },
-      this.startRound,
+      this.startRound
     );
   }
 
@@ -66,25 +66,25 @@ export default class QuizScreen extends Component {
       0,
       this.state.questions[this.state.currentQuestion - 1][
         this.state.alternativeType
-      ],
+      ]
     );
 
-    this.setState({alternatives: alternatives});
+    this.setState({ alternatives: alternatives });
   };
 
   nextQuestion = () => {
     this.setState(
-      {currentQuestion: this.state.currentQuestion + 1, showAnswer: false},
-      this.getAlternatives,
+      { currentQuestion: this.state.currentQuestion + 1, showAnswer: false },
+      this.getAlternatives
     );
   };
 
   restartTimer() {
     clearInterval(this.timer);
-    this.setState({timeLeft: 10});
+    this.setState({ timeLeft: 10 });
     setTimeout(() => {
       this.timer = setInterval(() => {
-        this.setState({timeLeft: this.state.timeLeft - 1});
+        this.setState({ timeLeft: this.state.timeLeft - 1 });
         if (this.state.timeLeft === 0) {
           this.nextQuestion();
           this.restartTimer();
@@ -95,7 +95,7 @@ export default class QuizScreen extends Component {
 
   showAnswer = () => {
     if (!this.state.showAnswer) {
-      this.setState({showAnswer: true});
+      this.setState({ showAnswer: true });
       setTimeout(() => {
         this.setState(
           {
@@ -103,7 +103,7 @@ export default class QuizScreen extends Component {
           },
           this.state.currentQuestion !== this.state.numberOfQuestions
             ? this.nextQuestion
-            : this.props.navigation.navigate('Home'),
+            : this.props.navigation.navigate('Home')
         );
       }, 1000);
     }
@@ -113,7 +113,8 @@ export default class QuizScreen extends Component {
     return (
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
-        style={styles.scrollView}>
+        style={styles.scrollView}
+      >
         <Text>
           Question {this.state.currentQuestion + 1}/
           {this.state.numberOfQuestions + 1}
@@ -130,14 +131,15 @@ export default class QuizScreen extends Component {
             alignItems: 'center',
             justifyContent: 'center',
             height: 200,
-          }}>
+          }}
+        >
           <Image
             resizeMode="contain"
-            style={{width: 300, height: 150}}
+            style={{ width: 300, height: 150 }}
             source={this.state.questions[this.state.currentQuestion - 1]?.flag}
           />
         </View>
-        {this.state.alternatives.map(alternative => (
+        {this.state.alternatives.map((alternative) => (
           <TouchableOpacity
             style={
               this.state.showAnswer &&
@@ -151,7 +153,8 @@ export default class QuizScreen extends Component {
             onPress={() => {
               this.showAnswer();
               this.restartTimer();
-            }}>
+            }}
+          >
             <Text style={styles.buttonText}>{alternative}</Text>
           </TouchableOpacity>
         ))}

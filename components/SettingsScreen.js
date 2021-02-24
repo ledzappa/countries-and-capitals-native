@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import {Text, View} from 'react-native';
-import {ButtonGroup} from 'react-native-elements';
+import React, { Component } from 'react';
+import { Text, View } from 'react-native';
+import { ButtonGroup } from 'react-native-elements';
 
 export default class SettingsScreen extends Component {
   constructor() {
@@ -22,11 +22,11 @@ export default class SettingsScreen extends Component {
     this.props.navigation.navigate('Home', {
       alternatives: this.buttons[selectedIndex],
     });
-    this.setState({selectedIndex});
+    this.setState({ selectedIndex });
   }
 
   render() {
-    const {selectedIndex} = this.state;
+    const { selectedIndex } = this.state;
     return (
       <View>
         <Text>Number of alternatives:</Text>
@@ -34,7 +34,7 @@ export default class SettingsScreen extends Component {
           onPress={this.updateIndex}
           selectedIndex={selectedIndex}
           buttons={this.buttons}
-          containerStyle={{height: 100}}
+          containerStyle={{ height: 100 }}
         />
       </View>
     );
